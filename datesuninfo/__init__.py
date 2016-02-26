@@ -15,17 +15,21 @@ def date_sun_info(latitude=None, longitude=None, calc_date=None):
     # Initialize the location
     latitude = latitude or '35.3484055'  # Moore, OK, USA  @35.3484055,-97.48163
     longitude = longitude or '-97.48163'
-    # Use calc_date if given, otherwise start fresh with utcnow (shifted to US/Central to match lat,lon)
-    calc_date = calc_date or datetime.datetime.utcnow().replace(tzinfo=pytz.utc)\
-        .astimezone(pytz.timezone('US/Central'))
 
-    # Find the first second of the day for the date provided by calc_date
+    # No calc_date given? Start fresh with utcnow (shifted to US/Central to match lat,lon)
+    if calc_date is None:
+        calc_date = datetime.datetime.utcnow().replace(tzinfo=pytz.utc).astimezone(pytz.timezone('US/Central'))
+    # Convert any date objects to datetime.
+    if isinstance(calc_date, datetime.date) and not isinstance(calc_date, datetime.datetime):
+        calc_date = datetime.datetime(calc_date.year, calc_date.month, calc_date.day)
+    # No time zone? assume UTC
+    if calc_date.tzinfo is None or calc_date.tzinfo.utcoffset(calc_date) is None:
+        calc_date = calc_date.replace(tzinfo=pytz.utc)
+
+    # Find the first second of the day of calc_date
     start_date = datetime.datetime(calc_date.year, calc_date.month, calc_date.day, 0, 0, 0)
-    # Set the start_date timezone to match the calc_date timezone, or if unavailable assume it is utc.
-    try:
-        start_date = calc_date.tzinfo.localize(start_date)
-    except AttributeError:
-        start_date = calc_date.replace(tzinfo=pytz.utc)
+    # Set the start_date time zone to match the calc_date time zone
+    start_date = calc_date.tzinfo.localize(start_date)
 
     results = dict()
 
@@ -65,9 +69,9 @@ def date_sun_info(latitude=None, longitude=None, calc_date=None):
     results['astronomical_twilight_end'] = observer.next_setting(ephem.Sun(), use_center=True).datetime()
 
     for key in results:
-        # everything ephem does is in utc, so add the timezone to the results
+        # Everything ephem does is in utc, so add the time zone to the results
         results[key] = results[key].replace(tzinfo=pytz.utc)
-        # shift the results to match the timezone provided by calc_date
+        # Shift the results to match the time zone provided by calc_date
         results[key] = results[key].astimezone(calc_date.tzinfo)
 
     return results
