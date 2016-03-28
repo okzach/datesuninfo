@@ -8,8 +8,20 @@ __all__ = ['date_sun_info']
 
 
 def date_sun_info(latitude=None, longitude=None, calc_date=None):
-    """
-    Mimics PHPs `date_sun_info` using `pyephem`. Use `pytz` to set a timezone for the `calc_date`.
+    """Given a location and date, returns dict of sunrise/sunset/etc times.
+
+    Args:
+        latitude: A string containing the latitude (between -90.0 and 90.0)
+        longitude: A string containing the longitude (between -180.0 and 180.0)
+        calc_date: A timezone aware datetime object. Use `pytz` to set timezone.
+
+    Returns:
+        A dict of timezone aware datetime objects representing various sunrise/sunset events.
+
+        >>> print result.keys()
+        ['civil_twilight_end', 'nautical_twilight_end', 'transit', 'previous_sunset',
+         'sunset', 'next_sunrise', 'astronomical_twilight_begin', 'astronomical_twilight_end',
+         'civil_twilight_begin', 'sunrise', 'nautical_twilight_begin']
     """
 
     # Initialize the location
