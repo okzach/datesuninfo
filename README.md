@@ -18,10 +18,10 @@ calc_date = calc_date.astimezone(pytz.timezone('US/Central'))
 # Get the date_sun_info for Moore, OK using the current time in the central time zone.
 sun_info = date_sun_info(latitude='35.3484055', longitude='-97.48163', calc_date=calc_date)
 
-print 'Sunrise: {0}'.format(sun_info.get('sunrise'))
-print 'Solar Noon: {0}'.format(sun_info.get('transit'))
-print 'Sunset: {0}'.format(sun_info.get('sunset'))
-print sun_info.keys()
+print('Sunrise: {0}'.format(sun_info['sunrise']))
+print('Solar Noon: {0}'.format(sun_info['transit']))
+print('Sunset: {0}'.format(sun_info['sunset']))
+print(sun_info.keys())
 ```
 outputs:
 ```
@@ -35,4 +35,4 @@ Sunset: 2016-02-26 18:22:14.118211-06:00
 
 This is a functional work-in-progress.  I use it for personal projects; that is the purpose it serves.
 
-The last time this project saw love was February 2016.
+The last time this project saw love was early April 2016.
