@@ -1,2 +1,2 @@
-pyephem
+ephem
 pytz
