@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import datetime
 
 import ephem  # pip install pyephem
@@ -18,7 +20,7 @@ def date_sun_info(latitude=None, longitude=None, calc_date=None):
     Returns:
         A dict of timezone aware datetime objects representing various sunrise/sunset events.
 
-        >>> print result.keys()
+        >>> print(result.keys())
         ['civil_twilight_end', 'nautical_twilight_end', 'transit', 'previous_sunset',
          'sunset', 'next_sunrise', 'astronomical_twilight_begin', 'astronomical_twilight_end',
          'civil_twilight_begin', 'sunrise', 'nautical_twilight_begin']
@@ -90,5 +92,5 @@ def date_sun_info(latitude=None, longitude=None, calc_date=None):
 
 
 def main():
-    print 'DateSunInfo:'
-    print date_sun_info()
+    print('DateSunInfo:')
+    print(date_sun_info())
