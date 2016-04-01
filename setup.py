@@ -30,6 +30,10 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.5'
     ],
+    install_requires=[
+        'ephem>=3.7.6.0',
+        'pytz>=2016.3'
+    ],
     setup_requires=[]+pytest_runner,
     tests_require=['pytest']
 )
