@@ -5,7 +5,7 @@ setup(
     version='0.1.0',
     packages=['datesuninfo'],
     url='https://github.com/okzach/datesuninfo/',
-    license='',
+    license='MIT',
     author='Zach Adams',
     author_email='zach@okzach.com',
     description='Mimics PHPs date_sun_info() using pyephem.',
