@@ -1,5 +1,7 @@
 # datesuninfo
 
+[![Build Status](https://travis-ci.org/okzach/datesuninfo.svg?branch=master)](https://travis-ci.org/okzach/datesuninfo)
+
 Mimics PHPs `date_sun_info()` using python and `ephem`.
 
 Sunrise, solar noon, sunset, and twilight start/end times for a given location and datetime.
